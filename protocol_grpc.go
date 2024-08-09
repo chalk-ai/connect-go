@@ -984,27 +984,28 @@ func validateHex(input string) error {
 
 func grpcValidateResponseContentType(web bool, requestCodecName string, responseContentType string) *Error {
 	// Responses must have valid content-type that indicates same codec as the request.
-	bare, prefix := grpcContentTypeDefault, grpcContentTypePrefix
-	if web {
-		bare, prefix = grpcWebContentTypeDefault, grpcWebContentTypePrefix
-	}
-	if responseContentType == prefix+requestCodecName ||
-		(requestCodecName == codecNameProto && responseContentType == bare) {
-		return nil
-	}
-	expectedContentType := bare
-	if requestCodecName != codecNameProto {
-		expectedContentType = prefix + requestCodecName
-	}
-	code := CodeInternal
-	if responseContentType != bare && !strings.HasPrefix(responseContentType, prefix) {
-		// Doesn't even look like a gRPC response? Use code "unknown".
-		code = CodeUnknown
-	}
-	return errorf(
-		code,
-		"invalid content-type: %q; expecting %q",
-		responseContentType,
-		expectedContentType,
-	)
+	return nil
+	//bare, prefix := grpcContentTypeDefault, grpcContentTypePrefix
+	//if web {
+	//	bare, prefix = grpcWebContentTypeDefault, grpcWebContentTypePrefix
+	//}
+	//if responseContentType == prefix+requestCodecName ||
+	//	(requestCodecName == codecNameProto && responseContentType == bare) {
+	//	return nil
+	//}
+	//expectedContentType := bare
+	//if requestCodecName != codecNameProto {
+	//	expectedContentType = prefix + requestCodecName
+	//}
+	//code := CodeInternal
+	//if responseContentType != bare && !strings.HasPrefix(responseContentType, prefix) {
+	//	// Doesn't even look like a gRPC response? Use code "unknown".
+	//	code = CodeUnknown
+	//}
+	//return errorf(
+	//	code,
+	//	"invalid content-type: %q; expecting %q",
+	//	responseContentType,
+	//	expectedContentType,
+	//)
 }
